@@ -1,0 +1,11 @@
+FileCloud SetUp
+━━━━━━━━━━━━━━━
+Install and set-up script for FileCloud Docker
+
+
+Requirements
+------------
+- Ubuntu 22.04 LTS Server
+- Docker
+
+NOTE: Script is specific to setup on VirtualBox

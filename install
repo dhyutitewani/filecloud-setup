@@ -1,0 +1,19 @@
+#!/bin/bash
+
+wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+sudo sh -c 'curl -fsSL https://pgp.mongodb.com/server-4.4.asc | gpg --dearmor -o /usr/share/keyrings/mongodb-archive-keyring.gpg'
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+
+curl -fsSL https://repo.filecloudlabs.com/static/pgp/filecloud.asc | sudo gpg -o /usr/share/keyrings/filecloud.gpg --dearmor
+echo "deb [ arch=amd64 signed-by=/usr/share/keyrings/filecloud.gpg ] https://repo.filecloudlabs.com/apt/ubuntu jammy/filecloud/23.232 main" | sudo tee /etc/apt/sources.list.d/filecloud.list
+ 
+sudo apt-get update
+sudo apt-get install apache2 mongodb-org pigz -y
+sudo a2enmod mpm_worker rewrite
+sudo systemctl restart apache2
+sudo apt install -y --no-install-recommends php8.2*
+sudo ACCEPT_EULA=Y  apt-get install filecloud -y
+
+sudo install docker-compose docker-compose-v2
+sudo docker-compose up -d filecloud.server filecloud.mongodb

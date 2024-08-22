@@ -15,5 +15,5 @@ sudo systemctl restart apache2
 sudo apt install -y --no-install-recommends php8.2*
 sudo ACCEPT_EULA=Y  apt-get install filecloud -y
 
-sudo install docker-compose docker-compose-v2
+sudo apt install docker-compose docker-compose-v2
 sudo docker-compose up -d filecloud.server filecloud.mongodb
